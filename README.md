@@ -1,6 +1,9 @@
 # Flutter Firebase Starter project
 
-A project you can clone to build your next project with Flutter with Firebase services.
+**Made with :heartbeat: from Nepal**
+
+A project you can clone to build your next project with Flutter with Firebase services. 
+
 
 ## What Firebase features are implemented?
 1. Firebase Authentication
@@ -33,7 +36,7 @@ A project you can clone to build your next project with Flutter with Firebase se
 
 How to start your project based on this.
 
-1. Clone this repository locally
+1. Clone this repository locally. The folder structure is somewhat based on clean code architecture
 2. Delete `.git` folder to clear git history
 3. Using `change_app_package_name` package change the package name to whatever you want your package name to be
 4. For changing iOS package name use the text editors Find and Replace in whole project folder where you need to find `com.popupbits.firebasestarter` and with the package name you want
@@ -47,3 +50,6 @@ How to start your project based on this.
 11. **For push notifications** to work on iOS, you need to follow following two steps as described in [firebase_messaging](https://pub.dev/packages/firebase_messaging) iOS integration section
     - Generate the certificates required by Apple for receiving push notifications following [this guide](https://firebase.google.com/docs/cloud-messaging/ios/certs) in the Firebase docs. You can skip the section titled "Create the Provisioning Profile".
     - Follow the steps in the "[Upload your APNs certificate](https://firebase.google.com/docs/cloud-messaging/ios/client#upload_your_apns_certificate)" section of the Firebase docs.
+
+## Contribution
+Contribution (suggestions, issues, feature request, pull requests) are highly welcome. Also looking for help in making it testable by adding unit, widget and integration tests.
