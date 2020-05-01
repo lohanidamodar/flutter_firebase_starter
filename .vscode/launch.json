@@ -12,6 +12,13 @@
             "args": ["--flavor", "dev"]
         },
         {
+            "name": "Flutter Dev Web",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "args": ["--flavor", "dev", "--web-port","34091"]
+        },
+        {
             "name": "Flutter Prod",
             "request": "launch",
             "type": "dart",

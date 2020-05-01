@@ -13,6 +13,7 @@ import 'package:firebasestarter/features/profile/data/model/device_field.dart';
 import 'package:firebasestarter/features/profile/data/model/user.dart';
 import 'package:firebasestarter/features/profile/data/model/user_field.dart';
 import 'package:firebasestarter/features/profile/data/service/user_db_service.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 
@@ -125,8 +126,11 @@ class UserRepository with ChangeNotifier {
 
   Future<void> _saveUserRecord() async {
     if (_user == null) return;
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    int buildNumber = int.parse(packageInfo.buildNumber);
+    int buildNumber;
+    if(!kIsWeb) {
+      PackageInfo packageInfo = await PackageInfo.fromPlatform();
+      buildNumber = int.parse(packageInfo.buildNumber);
+    }
     User user = User(
       email: _user.email,
       name: _user.displayName,
@@ -147,6 +151,7 @@ class UserRepository with ChangeNotifier {
         UserFields.buildNumber: buildNumber,
       });
     }
+    if(!kIsWeb)
     _saveDevice(user);
   }
 

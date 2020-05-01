@@ -11,6 +11,8 @@ import 'package:firebasestarter/generated/l10n.dart';
 
 import 'core/presentation/providers/providers.dart';
 import 'core/presentation/res/themes.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+
 
 class App extends StatelessWidget {
   @override
@@ -29,6 +31,7 @@ class App extends StatelessWidget {
           ],
           supportedLocales: S.delegate.supportedLocales,
           navigatorObservers: [
+            if(!kIsWeb)
             FirebaseAnalyticsObserver(
               analytics: analytics,
               nameExtractor: analyticsNameExtractor,

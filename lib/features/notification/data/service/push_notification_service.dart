@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:io';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'dart:developer' as dev;
+import 'package:flutter/foundation.dart' show kIsWeb;
+
 
 class PushNotificationService {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
@@ -13,7 +15,7 @@ class PushNotificationService {
   FirebaseMessaging get firebaseMessaging => _firebaseMessaging;
 
   Future<String> init() async {
-    if(!initialized) {
+    if(!initialized && !kIsWeb) {
 
       if(Platform.isIOS) {
         _requestPermission();
