@@ -51,5 +51,13 @@ How to start your project based on this.
     - Generate the certificates required by Apple for receiving push notifications following [this guide](https://firebase.google.com/docs/cloud-messaging/ios/certs) in the Firebase docs. You can skip the section titled "Create the Provisioning Profile".
     - Follow the steps in the "[Upload your APNs certificate](https://firebase.google.com/docs/cloud-messaging/ios/client#upload_your_apns_certificate)" section of the Firebase docs.
 
+## Adding new Locale
+1. Install [localizely](https://localizely.com/) plugin for your IDE([VS Code](https://marketplace.visualstudio.com/items?itemName=localizely.flutter-intl) or [Android Studio](https://plugins.jetbrains.com/plugin/13666-flutter-intl))
+2. For VS code use the command `Flutter Intl: Add locale` to add new locale, 
+3. For android studio, goto `Tools | Flutter Intl` menu and find `Add Locale` command.
+4. This will generated the required arb file. You just need to update it with your key-value pairs
+5. Also check the documentation of the respective tools
+
+
 ## Contribution
 Contribution (suggestions, issues, feature request, pull requests) are highly welcome. Also looking for help in making it testable by adding unit, widget and integration tests.
