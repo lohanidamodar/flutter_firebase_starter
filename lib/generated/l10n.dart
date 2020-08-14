@@ -8,18 +8,24 @@ import 'intl/messages_all.dart';
 // Made by Localizely
 // **************************************************************************
 
+// ignore_for_file: non_constant_identifier_names, lines_longer_than_80_chars
+
 class S {
   S();
+  
+  static S current;
   
   static const AppLocalizationDelegate delegate =
     AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final String name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
-    final String localeName = Intl.canonicalizedLocale(name);
+    final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
+    final localeName = Intl.canonicalizedLocale(name); 
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
-      return S();
+      S.current = S();
+      
+      return S.current;
     });
   } 
 
@@ -27,6 +33,7 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Firebase starter`
   String get appName {
     return Intl.message(
       'Firebase starter',
@@ -36,6 +43,7 @@ class S {
     );
   }
 
+  /// `Login`
   String get loginButtonText {
     return Intl.message(
       'Login',
@@ -45,6 +53,7 @@ class S {
     );
   }
 
+  /// `Sign up`
   String get signupButtonText {
     return Intl.message(
       'Sign up',
@@ -54,6 +63,7 @@ class S {
     );
   }
 
+  /// `Continue with Google`
   String get googleButtonText {
     return Intl.message(
       'Continue with Google',
@@ -63,6 +73,7 @@ class S {
     );
   }
 
+  /// `Welcome`
   String get loginPageTitleText {
     return Intl.message(
       'Welcome',
@@ -72,6 +83,7 @@ class S {
     );
   }
 
+  /// `Our awesome login app`
   String get loginPageSubtitleText {
     return Intl.message(
       'Our awesome login app',
@@ -81,6 +93,7 @@ class S {
     );
   }
 
+  /// `Email`
   String get emailFieldlabel {
     return Intl.message(
       'Email',
@@ -90,6 +103,7 @@ class S {
     );
   }
 
+  /// `Password`
   String get passwordFieldLabel {
     return Intl.message(
       'Password',
@@ -99,6 +113,7 @@ class S {
     );
   }
 
+  /// `Please enter email`
   String get emailValidationError {
     return Intl.message(
       'Please enter email',
@@ -108,6 +123,7 @@ class S {
     );
   }
 
+  /// `Please enter password`
   String get passwordValidationError {
     return Intl.message(
       'Please enter password',
@@ -117,6 +133,7 @@ class S {
     );
   }
 
+  /// `Please confirm password`
   String get confirmPasswordValidationEmptyError {
     return Intl.message(
       'Please confirm password',
@@ -126,6 +143,7 @@ class S {
     );
   }
 
+  /// `Passwords do not match`
   String get confirmPasswordValidationMatchError {
     return Intl.message(
       'Passwords do not match',
@@ -135,6 +153,7 @@ class S {
     );
   }
 
+  /// `Confirm password`
   String get confirmPasswordFieldLabel {
     return Intl.message(
       'Confirm password',
@@ -144,6 +163,7 @@ class S {
     );
   }
 
+  /// `Log out`
   String get logoutButtonText {
     return Intl.message(
       'Log out',
@@ -153,6 +173,7 @@ class S {
     );
   }
 
+  /// `Profile`
   String get profilePageTitle {
     return Intl.message(
       'Profile',
@@ -162,6 +183,7 @@ class S {
     );
   }
 
+  /// `Name`
   String get nameFieldLabel {
     return Intl.message(
       'Name',
@@ -171,6 +193,7 @@ class S {
     );
   }
 
+  /// `Edit Profile`
   String get editProfile {
     return Intl.message(
       'Edit Profile',
@@ -180,6 +203,7 @@ class S {
     );
   }
 
+  /// `Save`
   String get saveButtonLabel {
     return Intl.message(
       'Save',
@@ -189,6 +213,7 @@ class S {
     );
   }
 
+  /// `Gallery`
   String get pickFromGalleryButtonLabel {
     return Intl.message(
       'Gallery',
@@ -198,6 +223,7 @@ class S {
     );
   }
 
+  /// `Take Photo`
   String get pickFromCameraButtonLabel {
     return Intl.message(
       'Take Photo',
@@ -207,6 +233,7 @@ class S {
     );
   }
 
+  /// `Cancel`
   String get cancelButtonLabel {
     return Intl.message(
       'Cancel',
@@ -216,6 +243,7 @@ class S {
     );
   }
 
+  /// `Pick Image`
   String get pickImageDialogTitle {
     return Intl.message(
       'Pick Image',
@@ -225,6 +253,7 @@ class S {
     );
   }
 
+  /// `Get Started`
   String get introFinishButtonLabel {
     return Intl.message(
       'Get Started',
@@ -253,7 +282,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   bool _isSupported(Locale locale) {
     if (locale != null) {
-      for (Locale supportedLocale in supportedLocales) {
+      for (var supportedLocale in supportedLocales) {
         if (supportedLocale.languageCode == locale.languageCode) {
           return true;
         }
