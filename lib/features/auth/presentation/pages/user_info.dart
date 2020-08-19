@@ -6,7 +6,7 @@ import 'package:firebasestarter/generated/l10n.dart';
 import '../../data/model/user_repository.dart';
 
 class UserInfoPage extends StatelessWidget {
-  final FirebaseUser user;
+  final User user;
 
   const UserInfoPage({Key key, this.user}) : super(key: key);
   @override
