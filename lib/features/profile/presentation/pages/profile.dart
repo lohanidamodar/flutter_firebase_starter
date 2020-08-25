@@ -15,7 +15,7 @@ class UserProfile extends StatelessWidget {
         title: Text(S.of(context).profilePageTitle),
       ),
       body: Consumer<UserRepository>(builder: (context, userRepo, _) {
-        User user = userRepo.user;
+        UserModel user = userRepo.user;
         return ListView(
           padding: const EdgeInsets.all(8.0),
           children: <Widget>[

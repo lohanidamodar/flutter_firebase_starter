@@ -13,7 +13,7 @@ import 'package:firebasestarter/generated/l10n.dart';
 import 'package:path/path.dart' as Path;
 
 class EditProfile extends StatefulWidget {
-  final User user;
+  final UserModel user;
 
   const EditProfile({Key key, this.user}) : super(key: key);
 

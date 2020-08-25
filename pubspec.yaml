@@ -8,23 +8,24 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cloud_firestore: ^0.13.7
+  firebase_core: "^0.5.0"
+  cloud_firestore: ^0.14.0+2
   provider: ^4.3.2
-  firebase_auth: ^0.16.1
-  google_sign_in: ^4.5.1
-  firebase_helpers: ^0.1.11
-  firebase_analytics: ^5.0.16
+  firebase_auth: ^0.18.0
+  google_sign_in: ^4.5.3
+  firebase_helpers: ^0.2.0
+  firebase_analytics: ^6.0.0
   firebase_crashlytics: ^0.1.4+1
-  firebase_messaging: ^6.0.16
-  firebase_storage: ^3.1.6
-  firebase_remote_config: ^0.3.1+1
+  firebase_messaging: ^7.0.0
+  firebase_storage: ^4.0.0
+  firebase_remote_config: ^0.4.0
   flutter_localizations:
     sdk: flutter
   google_fonts: ^1.1.0
   image_picker: ^0.6.7+4
   image_cropper: ^1.3.0
   flutter_svg: ^0.18.0
-  package_info: ^0.4.1
+  package_info: ^0.4.3
   device_info: ^0.4.2+6
   flutter_auth_buttons: ^0.9.0
   flutter_swiper: ^1.1.6
@@ -34,7 +35,6 @@ dev_dependencies:
   change_app_package_name: ^0.1.2
   flutter_test:
     sdk: flutter
-
 flutter:
   uses-material-design: true
 flutter_intl:
