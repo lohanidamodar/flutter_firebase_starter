@@ -1,7 +1,7 @@
 import 'package:firebase_helpers/firebase_helpers.dart';
 import 'package:firebasestarter/features/profile/data/model/user_field.dart';
 
-class User extends DatabaseItem {
+class UserModel extends DatabaseItem {
   String id;
   String name;
   String email;
@@ -11,7 +11,7 @@ class User extends DatabaseItem {
   int buildNumber;
   bool introSeen;
 
-  User(
+  UserModel(
       {this.id,
       this.name,
       this.email,
@@ -21,7 +21,7 @@ class User extends DatabaseItem {
       this.introSeen,
       this.buildNumber}):super(id);
 
-  User.fromDS(String id, Map<String, dynamic> data):
+  UserModel.fromDS(String id, Map<String, dynamic> data):
     id = id,
     name = data[UserFields.name],
     email = data[UserFields.email],
