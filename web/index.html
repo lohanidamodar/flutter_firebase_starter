@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
@@ -10,15 +11,17 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="firebase_starter">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
-  <meta name="google-signin-client_id" content="536497204890-mqqsgf2rj3lcl9bma9tfnlpestc03acv.apps.googleusercontent.com">
+  <meta name="google-signin-client_id"
+    content="536497204890-mqqsgf2rj3lcl9bma9tfnlpestc03acv.apps.googleusercontent.com">
 
 
   <!-- Favicon -->
-  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <link rel="shortcut icon" type="image/png" href="favicon.png" />
 
   <title>firebase_starter</title>
   <link rel="manifest" href="manifest.json">
 </head>
+
 <body>
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
@@ -30,11 +33,12 @@
       });
     }
   </script>
-  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
   <script>
-    // Your web app's Firebase configuration
+    // Your web app's Firebase configuration - replace it with your own
     var firebaseConfig = {
       apiKey: "AIzaSyACpeQhVMQxkTsZU7okpblaA9Q0b9VUCr4",
       authDomain: "pb-test-projects.firebaseapp.com",
@@ -42,11 +46,13 @@
       projectId: "pb-test-projects",
       storageBucket: "pb-test-projects.appspot.com",
       messagingSenderId: "536497204890",
-      appId: "1:536497204890:web:8cc1af7eeea87eaaf73923"
+      appId: "1:536497204890:web:af6208466c72f21df73923",
+      measurementId: "G-5VT8MPQVX5"
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
   </script>
   <script src="main.dart.js" type="application/javascript"></script>
 </body>
+
 </html>
