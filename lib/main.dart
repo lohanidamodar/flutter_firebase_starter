@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebasestarter/core/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:firebasestarter/app.dart';
 import 'package:firebasestarter/core/presentation/res/app_config.dart';
 import 'package:firebasestarter/core/presentation/res/constants.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' as rp;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,12 +21,16 @@ void main() async {
           location: BannerLocation.topEnd,
           message: "dev",
           textDirection: TextDirection.ltr,
-          child: Provider<AppConfig>(
-            create: (context) => AppConfig(
-              appTitle: AppConstants.appNameDev,
-              buildFlavor: AppFlavor.dev,
-            ),
+          child: rp.ProviderScope(
             child: App(),
+            overrides: [
+              configProvider.overrideWithProvider(rp.Provider(
+                (ref) => AppConfig(
+                  appTitle: AppConstants.appNameDev,
+                  buildFlavor: AppFlavor.dev,
+                ),
+              ))
+            ],
           ),
         ),
       ),

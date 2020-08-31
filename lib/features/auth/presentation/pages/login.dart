@@ -1,9 +1,9 @@
+import 'package:firebasestarter/core/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 import 'package:firebasestarter/generated/l10n.dart';
-import '../../data/model/user_repository.dart';
 import '../widgets/auth_dialog.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -24,7 +24,6 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
-    UserRepository user = Provider.of<UserRepository>(context);
     return Scaffold(
       key: _key,
       body: Stack(
@@ -85,7 +84,7 @@ class _WelcomePageState extends State<WelcomePage> {
               GoogleSignInButton(
                 text: S.of(context).googleButtonText,
                 onPressed: () async {
-                  if (!await user.signInWithGoogle())
+                  if (!await context.read(userRepoProvider).signInWithGoogle())
                     _key.currentState.showSnackBar(SnackBar(
                       content: Text("Something is wrong"),
                     ));

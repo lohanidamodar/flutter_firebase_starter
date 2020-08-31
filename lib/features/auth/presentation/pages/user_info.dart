@@ -1,9 +1,9 @@
+import 'package:firebasestarter/core/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebasestarter/core/presentation/res/analytics.dart';
 import 'package:firebasestarter/generated/l10n.dart';
-import '../../data/model/user_repository.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserInfoPage extends StatelessWidget {
   final User user;
@@ -24,7 +24,7 @@ class UserInfoPage extends StatelessWidget {
               child: Text(S.of(context).logoutButtonText),
               onPressed: () {
                 logEvent(context, AppAnalyticsEvents.logOut);
-                Provider.of<UserRepository>(context, listen: false).signOut();
+                context.read(userRepoProvider).signOut();
               },
             )
           ],
