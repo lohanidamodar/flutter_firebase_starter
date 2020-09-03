@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:firebasestarter/app.dart';
 import 'package:firebasestarter/core/presentation/res/app_config.dart';
 import 'package:firebasestarter/core/presentation/res/constants.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' as rp;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +21,7 @@ void main() async {
           location: BannerLocation.topEnd,
           message: "dev",
           textDirection: TextDirection.ltr,
-          child: rp.ProviderScope(
+          child: ProviderScope(
             child: App(),
             overrides: [
               configProvider.overrideWithProvider(rp.Provider(
