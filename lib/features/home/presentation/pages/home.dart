@@ -27,31 +27,8 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: Row(
-        children: [
-          NavigationRail(
-            selectedIndex: 0,
-            minExtendedWidth: 250,
-            extended: true,
-            destinations: [
-              NavigationRailDestination(
-                icon: Icon(Icons.category),
-                label: Text("Categories"),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.add),
-                label: Text("Add Question"),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.add),
-                label: Text("Add Category"),
-              ),
-            ],
-          ),
-          Expanded(
-            child: Text("Home Page"),
-          ),
-        ],
+      body: ListView(
+        children: [Text("Home Page")],
       ),
     );
   }
