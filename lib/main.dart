@@ -24,7 +24,7 @@ void main() async {
           child: ProviderScope(
             child: App(),
             overrides: [
-              configProvider.overrideWithProvider(rp.Provider(
+              configProvider.overrideWithProvider(Provider(
                 (ref) => AppConfig(
                   appTitle: AppConstants.appNameDev,
                   buildFlavor: AppFlavor.dev,
