@@ -10,9 +10,13 @@ void main() async {
   await Firebase.initializeApp();
   // Crashlytics.instance.enableInDevMode = true;
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
-  runZoned(() {
-    runApp(
-      ProviderScope(child: App()),
-    );
-  }, onError: Crashlytics.instance.recordError);
+  runZonedGuarded<Future<void>>(
+    () async {
+      runApp(
+        ProviderScope(child: App()),
+      );
+    },
+    (Object error, StackTrace stackTrace) =>
+        Crashlytics.instance.recordError(error, stackTrace),
+  );
 }

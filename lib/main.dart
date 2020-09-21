@@ -13,7 +13,7 @@ void main() async {
   await Firebase.initializeApp();
   Crashlytics.instance.enableInDevMode = true;
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
-  runZoned(() {
+  runZonedGuarded<Future<void>>(() async {
     runApp(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -35,5 +35,7 @@ void main() async {
         ),
       ),
     );
-  }, onError: Crashlytics.instance.recordError);
+  },
+      (Object error, StackTrace stackTrace) =>
+          Crashlytics.instance.recordError(error, stackTrace));
 }
