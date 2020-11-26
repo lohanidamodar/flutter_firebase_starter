@@ -97,5 +97,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }
 
-apply plugin: 'io.fabric'
+apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'com.google.gms.google-services'
