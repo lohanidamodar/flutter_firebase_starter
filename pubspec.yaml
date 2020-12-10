@@ -33,6 +33,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   change_app_package_name: ^0.1.2
+  integration_test: ^1.0.0
   flutter_automation: ^1.3.2
   intl_translation: ^0.17.0
 flutter:
