@@ -72,6 +72,7 @@ class _LoginFormState extends State<LoginForm> {
           if (user.status != Status.Authenticating)
             Center(
               child: RaisedButton(
+                key: Key("login-button"),
                 elevation: 0,
                 highlightElevation: 0,
                 onPressed: _login,
