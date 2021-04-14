@@ -10,9 +10,8 @@ import 'package:firebasestarter/core/presentation/res/constants.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  Crashlytics.instance.enableInDevMode = true;
-  FlutterError.onError = Crashlytics.instance.recordFlutterError;
-  runZoned(() {
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+  runZonedGuarded(() {
     runApp(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -30,5 +29,5 @@ void main() async {
         ),
       ),
     );
-  }, onError: Crashlytics.instance.recordError);
+  }, FirebaseCrashlytics.instance.recordError);
 }

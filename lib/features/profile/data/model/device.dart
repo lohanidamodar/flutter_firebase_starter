@@ -1,7 +1,7 @@
 import 'package:firebase_helpers/firebase_helpers.dart';
 import 'package:firebasestarter/features/profile/data/model/device_field.dart';
 
-class Device  extends DatabaseItem{
+class Device{
   String id;
   DateTime createdAt;
   bool expired;
@@ -10,7 +10,7 @@ class Device  extends DatabaseItem{
   DeviceDetails deviceInfo;
   String token;
 
-  Device({this.id, this.token,this.createdAt,this.expired,this.uninstalled,this.lastUpdatedAt,this.deviceInfo}):super(id);
+  Device({this.id, this.token,this.createdAt,this.expired,this.uninstalled,this.lastUpdatedAt,this.deviceInfo});
 
   Device.fromDS(String id, Map<String,dynamic> data):
     id=id,
@@ -19,8 +19,7 @@ class Device  extends DatabaseItem{
     uninstalled=data[DeviceFields.uninstalled] ?? false,
     lastUpdatedAt=data[DeviceFields.lastUpdatedAt],
     deviceInfo=DeviceDetails.fromJson(data[DeviceFields.deviceInfo]),
-    token=data[DeviceFields.token],
-    super(id);
+    token=data[DeviceFields.token];
   
   Map<String,dynamic> toMap()  {
     return {
