@@ -139,7 +139,7 @@ class UserRepository with ChangeNotifier {
     );
     UserModel existing = await userDBS.getSingle(_user.uid);
     if (existing == null) {
-      await userDBS.createItem(user, id: _user.uid);
+      await userDBS.create(user.toMap(), id: _user.uid);
       _fsUser = user;
     } else {
       await userDBS.updateData(_user.uid, {
@@ -206,7 +206,7 @@ class UserRepository with ChangeNotifier {
         lastUpdatedAt: nowMS,
         uninstalled: false,
       );
-      await userDeviceDBS.createItem(device, id: deviceId);
+      await userDeviceDBS.create(device.toMap(), id: deviceId);
       currentDevice = device;
     }
     notifyListeners();
