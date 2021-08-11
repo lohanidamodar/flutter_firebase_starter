@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:firebasestarter/core/presentation/res/colors.dart';
 
 class Avatar extends StatelessWidget {
-  final ImageProvider<dynamic> image;
-  final Color borderColor;
+  final ImageProvider<dynamic>? image;
+  final Color? borderColor;
   final double radius;
   final double borderWidth;
-  final Function onButtonPressed;
+  final Function? onButtonPressed;
   final bool showButton;
 
   const Avatar(
-      {Key key,
-      @required this.image,
+      {Key? key,
+      required this.image,
       this.borderColor,
       this.radius = 30,
       this.onButtonPressed,
@@ -30,7 +30,7 @@ class Avatar extends StatelessWidget {
               borderColor != null ? borderColor : AppColors.primaryColorLight,
           child: CircleAvatar(
             radius: radius - borderWidth,
-            backgroundImage: image,
+            backgroundImage: image as ImageProvider<Object>?,
           ),
         ),
         if(showButton)
@@ -43,7 +43,7 @@ class Avatar extends StatelessWidget {
             shape: CircleBorder(),
             child: Icon(Icons.camera_alt),
             padding: const EdgeInsets.all(4.0),
-            onPressed: onButtonPressed,
+            onPressed: onButtonPressed as void Function()?,
           ),
         )
       ],

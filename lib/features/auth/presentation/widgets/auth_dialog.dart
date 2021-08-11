@@ -3,15 +3,15 @@ import './login.dart';
 import './signup.dart';
 
 class AuthDialog extends StatefulWidget {
-  final int selectedTab;
-  final Function onClose;
-  const AuthDialog({Key key, this.selectedTab, this.onClose}) : super(key: key);
+  final int? selectedTab;
+  final Function? onClose;
+  const AuthDialog({Key? key, this.selectedTab, this.onClose}) : super(key: key);
   @override
   _AuthDialogState createState() => _AuthDialogState();
 }
 
 class _AuthDialogState extends State<AuthDialog> {
-  int _selectedTab;
+  int? _selectedTab;
   @override
   void initState() {
     super.initState();
@@ -22,7 +22,7 @@ class _AuthDialogState extends State<AuthDialog> {
   Widget build(BuildContext context) {
     return Center(
       child: DefaultTabController(
-        initialIndex: _selectedTab,
+        initialIndex: _selectedTab!,
         length: 2,
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -54,7 +54,7 @@ class _AuthDialogState extends State<AuthDialog> {
                   color: Colors.white,
                   icon: Icon(Icons.clear),
                   onPressed: () => widget.onClose != null
-                      ? widget.onClose()
+                      ? widget.onClose!()
                       : Navigator.pop(context),
                 ),
               ],

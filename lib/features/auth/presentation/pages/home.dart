@@ -20,7 +20,7 @@ class AuthHomePage extends StatelessWidget {
             case Status.Authenticated:
               setUserProperties(context,id: user.fbUser?.uid, name: user.fbUser?.displayName, email: user.fbUser?.email);
               setCurrentScreen(context, AnalyticsScreenNames.userInfo);
-              if(user.isLoading) return Splash();
+              if(user.isLoading!) return Splash();
               return user.user?.introSeen ?? false ? HomePage() : IntroPage();
             case Status.Uninitialized:
             default:

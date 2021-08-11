@@ -2,14 +2,14 @@ import 'package:firebase_helpers/firebase_helpers.dart';
 import 'package:firebasestarter/features/profile/data/model/user_field.dart';
 
 class UserModel {
-  String id;
-  String name;
-  String email;
-  DateTime lastLoggedIn;
-  DateTime registrationDate;
-  String photoUrl;
-  int buildNumber;
-  bool introSeen;
+  String? id;
+  String? name;
+  String? email;
+  DateTime? lastLoggedIn;
+  DateTime? registrationDate;
+  String? photoUrl;
+  int? buildNumber;
+  bool? introSeen;
 
   UserModel(
       {this.id,

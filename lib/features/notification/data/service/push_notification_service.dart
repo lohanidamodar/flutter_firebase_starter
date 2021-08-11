@@ -6,13 +6,13 @@ import 'dart:developer' as dev;
 class PushNotificationService {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   bool initialized = false;
-  String token;
+  String? token;
 
   PushNotificationService();
 
   FirebaseMessaging get firebaseMessaging => _firebaseMessaging;
 
-  Future<String> init() async {
+  Future<String?> init() async {
     if (!initialized) {
       if (Platform.isIOS) {
         _requestPermission();
@@ -22,7 +22,7 @@ class PushNotificationService {
         return;
       });
 
-      RemoteMessage message = await _firebaseMessaging.getInitialMessage();
+      RemoteMessage? message = await _firebaseMessaging.getInitialMessage();
       dev.log("notification onMessage", error: message, time: DateTime.now());
 
       FirebaseMessaging.onMessageOpenedApp.listen((message) {

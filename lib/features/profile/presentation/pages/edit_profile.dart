@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:firebase_helpers/firebase_helpers.dart';
@@ -13,9 +14,9 @@ import 'package:firebasestarter/generated/l10n.dart';
 import 'package:path/path.dart' as Path;
 
 class EditProfile extends StatefulWidget {
-  final UserModel user;
+  final UserModel? user;
 
-  const EditProfile({Key key, this.user}) : super(key: key);
+  const EditProfile({Key? key, this.user}) : super(key: key);
 
   @override
   _EditProfileState createState() => _EditProfileState();
@@ -28,25 +29,25 @@ enum AppState {
 }
 
 class _EditProfileState extends State<EditProfile> {
-  TextEditingController _nameController;
-  bool _processing;
-  AppState state;
-  File _image;
-  String _uploadedFileURL;
+  TextEditingController? _nameController;
+  late bool _processing;
+  AppState? state;
+  File? _image;
+  String? _uploadedFileURL;
 
   @override
   void initState() {
     super.initState();
     _processing = false;
     state = AppState.free;
-    _nameController = TextEditingController(text: widget.user.name);
+    _nameController = TextEditingController(text: widget.user!.name);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).editProfile),
+        title: Text(S.of(context)!.editProfile),
       ),
       body: ListView(
         padding: const EdgeInsets.all(8.0),
@@ -56,32 +57,32 @@ class _EditProfileState extends State<EditProfile> {
               showButton: true,
               onButtonPressed: _pickImageButtonPressed,
               radius: 50,
-              image: state == AppState.cropped && _image != null
-                  ? FileImage(_image)
-                  : widget.user.photoUrl != null
-                      ? NetworkImage(widget.user.photoUrl)
-                      : null,
+              image: (state == AppState.cropped && _image != null
+                  ? FileImage(_image!)
+                  : widget.user!.photoUrl != null
+                      ? NetworkImage(widget.user!.photoUrl!)
+                      : null) as ImageProvider<dynamic>?,
             ),
           ),
           const SizedBox(height: 10.0),
-          Center(child: Text(widget.user.email)),
+          Center(child: Text(widget.user!.email!)),
           const SizedBox(height: 10.0),
           TextField(
             controller: _nameController,
             decoration:
-                InputDecoration(labelText: S.of(context).nameFieldLabel),
+                InputDecoration(labelText: S.of(context)!.nameFieldLabel),
           ),
           const SizedBox(height: 10.0),
           Center(
             child: RaisedButton(
               child: _processing
                   ? CircularProgressIndicator()
-                  : Text(S.of(context).saveButtonLabel),
+                  : Text(S.of(context)!.saveButtonLabel),
               onPressed: _processing
                   ? null
                   : () async {
                       //save name
-                      if (_nameController.text.isEmpty &&
+                      if (_nameController!.text.isEmpty &&
                           (_image == null || state != AppState.cropped)) return;
                       setState(() {
                         _processing = true;
@@ -90,12 +91,12 @@ class _EditProfileState extends State<EditProfile> {
                         await uploadImage();
                       }
                       Map<String, dynamic> data = {};
-                      if (_nameController.text.isNotEmpty)
-                        data[UserFields.name] = _nameController.text;
+                      if (_nameController!.text.isNotEmpty)
+                        data[UserFields.name] = _nameController!.text;
                       if (_uploadedFileURL != null)
                         data[UserFields.photoUrl] = _uploadedFileURL;
                       if (data.isNotEmpty) {
-                        await userDBS.updateData(widget.user.id, data);
+                        await userDBS.updateData(widget.user!.id!, data);
                       }
                       if (mounted) {
                         setState(() {
@@ -117,7 +118,7 @@ class _EditProfileState extends State<EditProfile> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(
-              S.of(context).pickImageDialogTitle,
+              S.of(context)!.pickImageDialogTitle,
             ),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0)),
@@ -130,13 +131,13 @@ class _EditProfileState extends State<EditProfile> {
                       onTap: () {
                         getImage(ImageSource.camera);
                       },
-                      title: Text(S.of(context).pickFromCameraButtonLabel),
+                      title: Text(S.of(context)!.pickFromCameraButtonLabel),
                     ),
                     ListTile(
                       onTap: () {
                         getImage(ImageSource.gallery);
                       },
-                      title: Text(S.of(context).pickFromGalleryButtonLabel),
+                      title: Text(S.of(context)!.pickFromGalleryButtonLabel),
                     ),
                 ],),
                 FlatButton(
@@ -144,7 +145,7 @@ class _EditProfileState extends State<EditProfile> {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    S.of(context).cancelButtonLabel,
+                    S.of(context)!.cancelButtonLabel,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -166,8 +167,8 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   Future<Null> _cropImage() async {
-    File croppedFile = await ImageCropper.cropImage(
-      sourcePath: _image.path,
+    File? croppedFile = await ImageCropper.cropImage(
+      sourcePath: _image!.path,
       maxWidth: 800,
       aspectRatio: CropAspectRatio(ratioX: 1.0, ratioY: 1.0),
     );
@@ -181,8 +182,8 @@ class _EditProfileState extends State<EditProfile> {
 
   Future uploadImage() async {
     String path =
-        '${AppDBConstants.usersStorageBucket}/${widget.user.id}/${Path.basename(_image.path)}';
-    String url = await StorageService.instance.uploadFile(path, _image);
+        '${AppDBConstants.usersStorageBucket}/${widget.user!.id}/${Path.basename(_image!.path)}';
+    String? url = await (StorageService.instance.uploadFile(path, _image!) as FutureOr<String?>);
     setState(() {
       _uploadedFileURL = url;
     });

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:provider/provider.dart';
 import 'package:firebasestarter/features/auth/data/model/user_repository.dart';
 import 'package:firebasestarter/features/profile/data/model/user_field.dart';
@@ -21,7 +21,7 @@ class IntroPage extends StatelessWidget {
                 onPressed: (){
                   _finishIntroScreen(context);
                 },
-                child: Text(S.of(context).introFinishButtonLabel),
+                child: Text(S.of(context)!.introFinishButtonLabel),
               )
             ],
           );
@@ -31,7 +31,7 @@ class IntroPage extends StatelessWidget {
   }
 
   _finishIntroScreen(BuildContext context) async {
-    await userDBS.updateData(Provider.of<UserRepository>(context,listen: false).user.id, {
+    await userDBS.updateData(Provider.of<UserRepository>(context,listen: false).user!.id!, {
       UserFields.introSeen: true,
     });
   }

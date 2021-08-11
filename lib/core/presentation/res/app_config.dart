@@ -9,5 +9,5 @@ class AppConfig {
   final String appTitle;
   final AppFlavor buildFlavor;
 
-  AppConfig({@required this.appTitle, @required this.buildFlavor});
+  AppConfig({required this.appTitle, required this.buildFlavor});
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
+import 'package:auth_buttons/auth_buttons.dart';
 import 'package:firebasestarter/generated/l10n.dart';
 import '../../data/model/user_repository.dart';
 import '../widgets/auth_dialog.dart';
@@ -12,8 +12,8 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
-  bool _authVisible;
-  int _selectedTab;
+  late bool _authVisible;
+  int? _selectedTab;
 
   @override
   void initState() {
@@ -40,14 +40,14 @@ class _WelcomePageState extends State<WelcomePage> {
             children: <Widget>[
               const SizedBox(height: kToolbarHeight),
               Text(
-                S.of(context).loginPageTitleText,
-                style: Theme.of(context).textTheme.display2.copyWith(
+                S.of(context)!.loginPageTitleText,
+                style: Theme.of(context).textTheme.display2!.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.w900,
                     fontFamily: "Frank"),
               ),
               Text(
-                S.of(context).loginPageSubtitleText,
+                S.of(context)!.loginPageSubtitleText,
                 style: TextStyle(color: Colors.white, fontSize: 20.0),
               ),
               const SizedBox(height: 40.0),
@@ -59,7 +59,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       child: RaisedButton(
                         elevation: 0,
                         highlightElevation: 0,
-                        child: Text(S.of(context).loginButtonText),
+                        child: Text(S.of(context)!.loginButtonText),
                         onPressed: () => setState(() {
                           _authVisible = true;
                           _selectedTab = 0;
@@ -70,7 +70,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     Expanded(
                       child: OutlineButton(
                         textColor: Colors.white,
-                        child: Text(S.of(context).signupButtonText),
+                        child: Text(S.of(context)!.signupButtonText),
                         onPressed: () => setState(() {
                           _authVisible = true;
                           _selectedTab = 1;
@@ -82,11 +82,11 @@ class _WelcomePageState extends State<WelcomePage> {
                 ),
               ),
               const SizedBox(height: 50.0),
-              GoogleSignInButton(
-                text: S.of(context).googleButtonText,
+              GoogleAuthButton(
+                text: S.of(context)!.googleButtonText,
                 onPressed: () async {
                   if (!await user.signInWithGoogle())
-                    _key.currentState.showSnackBar(SnackBar(
+                    _key.currentState!.showSnackBar(SnackBar(
                       content: Text("Something is wrong"),
                     ));
                 },

@@ -10,11 +10,11 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   TextStyle style = TextStyle(fontSize: 20.0);
-  TextEditingController _email;
-  TextEditingController _password;
-  FocusNode _passwordField;
+  TextEditingController? _email;
+  TextEditingController? _password;
+  FocusNode? _passwordField;
   final _formKey = GlobalKey<FormState>();
-  UserRepository user;
+  late UserRepository user;
 
   @override
   void initState() {
@@ -38,9 +38,9 @@ class _LoginFormState extends State<LoginForm> {
               key: Key("email-field"),
               controller: _email,
               validator: (value) =>
-                  (value.isEmpty) ? S.of(context).emailValidationError : null,
+                  (value!.isEmpty) ? S.of(context)!.emailValidationError : null,
               decoration: InputDecoration(
-                labelText: S.of(context).emailFieldlabel,
+                labelText: S.of(context)!.emailFieldlabel,
               ),
               style: style,
               textInputAction: TextInputAction.next,
@@ -58,9 +58,9 @@ class _LoginFormState extends State<LoginForm> {
               controller: _password,
               obscureText: true,
               validator: (value) =>
-                  (value.isEmpty) ? S.of(context).passwordValidationError : null,
+                  (value!.isEmpty) ? S.of(context)!.passwordValidationError : null,
               decoration: InputDecoration(
-                labelText: S.of(context).passwordFieldLabel,
+                labelText: S.of(context)!.passwordFieldLabel,
               ),
               style: style,
               onEditingComplete: _login,
@@ -76,7 +76,7 @@ class _LoginFormState extends State<LoginForm> {
                 elevation: 0,
                 highlightElevation: 0,
                 onPressed: _login,
-                child: Text(S.of(context).loginButtonText),
+                child: Text(S.of(context)!.loginButtonText),
               ),
             ),
         ],
@@ -85,18 +85,18 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   _login() async {
-    if (_formKey.currentState.validate()) {
-      if (!await user.signIn(_email.text, _password.text))
+    if (_formKey.currentState!.validate()) {
+      if (!await user.signIn(_email!.text, _password!.text))
         Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text(user.error),
+          content: Text(user.error!),
         ));
     }
   }
 
   @override
   void dispose() {
-    _email.dispose();
-    _password.dispose();
+    _email!.dispose();
+    _password!.dispose();
     super.dispose();
   }
 }
