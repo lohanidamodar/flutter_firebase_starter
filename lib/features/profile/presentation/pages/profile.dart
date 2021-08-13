@@ -12,10 +12,10 @@ class UserProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).profilePageTitle),
+        title: Text(S.of(context)!.profilePageTitle),
       ),
       body: Consumer<UserRepository>(builder: (context, userRepo, _) {
-        UserModel user = userRepo.user;
+        UserModel? user = userRepo.user;
         return ListView(
           padding: const EdgeInsets.all(8.0),
           children: <Widget>[
@@ -25,28 +25,28 @@ class UserProfile extends StatelessWidget {
                   onButtonPressed: () {},
                   radius: 50,
                   image: user.photoUrl != null
-                      ? NetworkImage(user.photoUrl)
+                      ? NetworkImage(user.photoUrl!)
                       : null,
                 ),
               ),
               const SizedBox(height: 10.0),
               if(user.name != null) ...[
-                Center(child: Text(user.name),),
+                Center(child: Text(user.name ?? "Unknown"),),
                 const SizedBox(height: 5.0),
               ],
-              Center(child: Text(user?.email)),
+              Center(child: Text(user.email ?? "No Email")),
             ],
             ...ListTile.divideTiles(
               color: Theme.of(context).dividerColor,
               tiles: [
                 ListTile(
                   leading: Icon(Icons.edit),
-                  title: Text(S.of(context).editProfile),
+                  title: Text(S.of(context)!.editProfile),
                   onTap: () => Navigator.pushNamed(context, AppRoutes.editProfile,arguments: user),
                 ),
                 ListTile(
                   leading: Icon(Icons.exit_to_app),
-                  title: Text(S.of(context).logoutButtonText),
+                  title: Text(S.of(context)!.logoutButtonText),
                   onTap: () async {
                     await logEvent(context, AppAnalyticsEvents.logOut);
                     await Provider.of<UserRepository>(context, listen: false)

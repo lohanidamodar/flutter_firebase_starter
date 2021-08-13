@@ -4,7 +4,7 @@ import 'package:firebasestarter/core/presentation/res/colors.dart';
 import 'package:firebasestarter/core/presentation/res/sizes.dart';
 
 class AppThemes {
-  static BuildContext context;
+  static late BuildContext context;
   static final ThemeData defaultTheme = ThemeData(
     primaryColor: AppColors.primaryColor,
     accentColor: AppColors.accentColor,

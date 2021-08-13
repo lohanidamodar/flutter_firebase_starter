@@ -1,3 +1,4 @@
+import 'package:firebasestarter/features/profile/data/model/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebasestarter/features/auth/presentation/pages/home.dart';
@@ -25,7 +26,7 @@ class AppRoutes {
           case userInfo:
             return UserInfoPage();
           case editProfile:
-            return EditProfile(user: settings.arguments,);
+            return EditProfile(user: settings.arguments as UserModel?,);
           case profile:
             return UserProfile();
           case splash:

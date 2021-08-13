@@ -1,15 +1,15 @@
 import 'package:firebase_helpers/firebase_helpers.dart';
 import 'package:firebasestarter/features/profile/data/model/user_field.dart';
 
-class UserModel extends DatabaseItem {
-  String id;
-  String name;
-  String email;
-  DateTime lastLoggedIn;
-  DateTime registrationDate;
-  String photoUrl;
-  int buildNumber;
-  bool introSeen;
+class UserModel {
+  String? id;
+  String? name;
+  String? email;
+  DateTime? lastLoggedIn;
+  DateTime? registrationDate;
+  String? photoUrl;
+  int? buildNumber;
+  bool? introSeen;
 
   UserModel(
       {this.id,
@@ -19,7 +19,7 @@ class UserModel extends DatabaseItem {
       this.registrationDate,
       this.photoUrl,
       this.introSeen,
-      this.buildNumber}):super(id);
+      this.buildNumber});
 
   UserModel.fromDS(String id, Map<String, dynamic> data):
     id = id,
@@ -29,8 +29,7 @@ class UserModel extends DatabaseItem {
     registrationDate = data[UserFields.registrationDate]?.toDate(),
     photoUrl = data[UserFields.photoUrl],
     buildNumber=data[UserFields.buildNumber],
-    introSeen=data[UserFields.introSeen],
-    super(id);
+    introSeen=data[UserFields.introSeen];
 
   Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = new Map<String, dynamic>();

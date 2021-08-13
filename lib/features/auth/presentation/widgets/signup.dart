@@ -10,14 +10,14 @@ class SignupForm extends StatefulWidget {
 
 class _SignupFormState extends State<SignupForm> {
   TextStyle style = TextStyle(fontSize: 20.0);
-  TextEditingController _email;
-  TextEditingController _password;
-  TextEditingController _confirmPassword;
-  FocusNode _passwordField;
-  FocusNode _confirmPasswordField;
+  TextEditingController? _email;
+  TextEditingController? _password;
+  TextEditingController? _confirmPassword;
+  FocusNode? _passwordField;
+  FocusNode? _confirmPasswordField;
   final _formKey = GlobalKey<FormState>();
   final _key = GlobalKey<ScaffoldState>();
-  UserRepository user;
+  late UserRepository user;
 
   @override
   void initState() {
@@ -43,9 +43,9 @@ class _SignupFormState extends State<SignupForm> {
               key: Key("email-field"),
               controller: _email,
               validator: (value) =>
-                  (value.isEmpty) ? S.of(context).emailValidationError : null,
+                  (value!.isEmpty) ? S.of(context)!.emailValidationError : null,
               decoration: InputDecoration(
-                labelText: S.of(context).emailFieldlabel,
+                labelText: S.of(context)!.emailFieldlabel,
               ),
               style: style,
               textInputAction: TextInputAction.next,
@@ -63,9 +63,9 @@ class _SignupFormState extends State<SignupForm> {
               controller: _password,
               obscureText: true,
               validator: (value) =>
-                  (value.isEmpty) ? S.of(context).passwordValidationError : null,
+                  (value!.isEmpty) ? S.of(context)!.passwordValidationError : null,
               decoration: InputDecoration(
-                labelText: S.of(context).passwordValidationError,
+                labelText: S.of(context)!.passwordValidationError,
               ),
               style: style,
               textInputAction: TextInputAction.next,
@@ -81,13 +81,13 @@ class _SignupFormState extends State<SignupForm> {
               key: Key("confirm-password-field"),
               controller: _confirmPassword,
               obscureText: true,
-              validator: (value) => (value.isEmpty)
-                  ? S.of(context).confirmPasswordValidationEmptyError
-                  : value.isNotEmpty && _password.text != _confirmPassword.text
-                      ? S.of(context).confirmPasswordValidationMatchError
+              validator: (value) => (value!.isEmpty)
+                  ? S.of(context)!.confirmPasswordValidationEmptyError
+                  : value.isNotEmpty && _password!.text != _confirmPassword!.text
+                      ? S.of(context)!.confirmPasswordValidationMatchError
                       : null,
               decoration: InputDecoration(
-                labelText: S.of(context).confirmPasswordFieldLabel,
+                labelText: S.of(context)!.confirmPasswordFieldLabel,
               ),
               style: style,
               focusNode: _confirmPasswordField,
@@ -103,7 +103,7 @@ class _SignupFormState extends State<SignupForm> {
                 elevation: 0,
                 highlightElevation: 0,
                 onPressed: _signup,
-                child: Text(S.of(context).signupButtonText),
+                child: Text(S.of(context)!.signupButtonText),
               ),
             ),
         ],
@@ -112,19 +112,19 @@ class _SignupFormState extends State<SignupForm> {
   }
 
   _signup() async {
-    if (_formKey.currentState.validate()) {
+    if (_formKey.currentState!.validate()) {
       //signup user
-      if (!await user.signup(_email.text, _password.text))
+      if (!await user.signup(_email!.text, _password!.text))
         Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text(user.error),
+          content: Text(user.error!),
         ));
     }
   }
 
   @override
   void dispose() {
-    _email.dispose();
-    _password.dispose();
+    _email!.dispose();
+    _password!.dispose();
     super.dispose();
   }
 }

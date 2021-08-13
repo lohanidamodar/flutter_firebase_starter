@@ -13,12 +13,12 @@ void main() {
       await tester.pumpAndSettle();
       expect(
           find.byWidgetPredicate((Widget widget) =>
-              widget is Text && widget.data.startsWith('Login')),
+              widget is Text && widget.data!.startsWith('Login')),
           findsOneWidget);
       final loginFinder = find.byWidgetPredicate((widget) =>
           widget is RaisedButton &&
           widget.child is Text &&
-          (widget.child as Text).data.startsWith('Login'));
+          (widget.child as Text).data!.startsWith('Login'));
       expect(loginFinder, findsOneWidget);
       await tester.tap(loginFinder);
       await tester.pumpAndSettle();

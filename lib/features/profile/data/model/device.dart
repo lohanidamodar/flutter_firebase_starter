@@ -1,16 +1,16 @@
 import 'package:firebase_helpers/firebase_helpers.dart';
 import 'package:firebasestarter/features/profile/data/model/device_field.dart';
 
-class Device  extends DatabaseItem{
-  String id;
-  DateTime createdAt;
-  bool expired;
-  bool uninstalled;
-  int lastUpdatedAt;
-  DeviceDetails deviceInfo;
-  String token;
+class Device{
+  String? id;
+  DateTime? createdAt;
+  bool? expired;
+  bool? uninstalled;
+  int? lastUpdatedAt;
+  DeviceDetails? deviceInfo;
+  String? token;
 
-  Device({this.id, this.token,this.createdAt,this.expired,this.uninstalled,this.lastUpdatedAt,this.deviceInfo}):super(id);
+  Device({this.id, this.token,this.createdAt,this.expired,this.uninstalled,this.lastUpdatedAt,this.deviceInfo});
 
   Device.fromDS(String id, Map<String,dynamic> data):
     id=id,
@@ -19,13 +19,12 @@ class Device  extends DatabaseItem{
     uninstalled=data[DeviceFields.uninstalled] ?? false,
     lastUpdatedAt=data[DeviceFields.lastUpdatedAt],
     deviceInfo=DeviceDetails.fromJson(data[DeviceFields.deviceInfo]),
-    token=data[DeviceFields.token],
-    super(id);
+    token=data[DeviceFields.token];
   
   Map<String,dynamic> toMap()  {
     return {
       DeviceFields.createdAt: createdAt,
-      DeviceFields.deviceInfo: deviceInfo.toJson(),
+      DeviceFields.deviceInfo: deviceInfo!.toJson(),
       DeviceFields.expired:expired,
       DeviceFields.uninstalled:uninstalled,
       DeviceFields.lastUpdatedAt: lastUpdatedAt,
@@ -35,10 +34,10 @@ class Device  extends DatabaseItem{
 }
 
 class DeviceDetails {
-  String device;
-  String model;
-  String osVersion;
-  String platform;
+  String? device;
+  String? model;
+  String? osVersion;
+  String? platform;
 
   DeviceDetails({this.device, this.model, this.osVersion, this.platform});
 
