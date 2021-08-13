@@ -27,7 +27,6 @@ dependencies:
   image_picker: ^0.8.3+2
   package_info: ^2.0.2
   provider: ^5.0.0
-  flutter_swiper_null_safety: ^1.0.2
   auth_buttons: ^1.0.1+4
 
 dev_dependencies:

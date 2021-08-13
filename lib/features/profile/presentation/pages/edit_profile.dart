@@ -125,8 +125,9 @@ class _EditProfileState extends State<EditProfile> {
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                ...ListTile.divideTiles(color: Theme.of(context).dividerColor,tiles: [
-
+                ...ListTile.divideTiles(
+                  color: Theme.of(context).dividerColor,
+                  tiles: [
                     ListTile(
                       onTap: () {
                         getImage(ImageSource.camera);
@@ -139,7 +140,8 @@ class _EditProfileState extends State<EditProfile> {
                       },
                       title: Text(S.of(context)!.pickFromGalleryButtonLabel),
                     ),
-                ],),
+                  ],
+                ),
                 FlatButton(
                   onPressed: () {
                     Navigator.pop(context);
@@ -156,9 +158,8 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   Future getImage(ImageSource source) async {
-    var image = await ImagePicker().getImage(
-        source: source);
-    if(image == null) return;
+    var image = await ImagePicker().getImage(source: source);
+    if (image == null) return;
     setState(() {
       _image = File(image.path);
       _cropImage();
@@ -183,7 +184,8 @@ class _EditProfileState extends State<EditProfile> {
   Future uploadImage() async {
     String path =
         '${AppDBConstants.usersStorageBucket}/${widget.user!.id}/${Path.basename(_image!.path)}';
-    String? url = await (StorageService.instance.uploadFile(path, _image!) as FutureOr<String?>);
+    String? url =
+        (await StorageService.instance.uploadFile(path, _image!)).toString();
     setState(() {
       _uploadedFileURL = url;
     });

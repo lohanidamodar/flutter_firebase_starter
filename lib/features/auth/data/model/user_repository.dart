@@ -77,7 +77,13 @@ class UserRepository with ChangeNotifier {
     try {
       _status = Status.Authenticating;
       notifyListeners();
-      final GoogleSignInAccount googleUser = await (_googleSignIn.signIn() as FutureOr<GoogleSignInAccount>);
+      final GoogleSignInAccount? googleUser = await (_googleSignIn.signIn());
+      if(googleUser == null) {
+        _error = 'Google sign in failed';
+        _status = Status.Unauthenticated;
+        notifyListeners();
+        return false;
+      }
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
       final GoogleAuthCredential credential = GoogleAuthProvider.credential(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:provider/provider.dart';
 import 'package:firebasestarter/features/auth/data/model/user_repository.dart';
 import 'package:firebasestarter/features/profile/data/model/user_field.dart';
@@ -10,14 +9,14 @@ class IntroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      body: Swiper(
+      body: PageView.builder(
         itemCount: 1,
         itemBuilder: (context,index){
           return Column(
             children: <Widget>[
               //implement intro screen
               Spacer(),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: (){
                   _finishIntroScreen(context);
                 },
