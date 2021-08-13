@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info/device_info.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -77,20 +78,25 @@ class UserRepository with ChangeNotifier {
     try {
       _status = Status.Authenticating;
       notifyListeners();
-      final GoogleSignInAccount? googleUser = await (_googleSignIn.signIn());
-      if(googleUser == null) {
-        _error = 'Google sign in failed';
-        _status = Status.Unauthenticated;
-        notifyListeners();
-        return false;
+      if (kIsWeb) {
+        GoogleAuthProvider googleProvider = GoogleAuthProvider();
+        await _auth.signInWithPopup(googleProvider);
+      } else {
+        final GoogleSignInAccount? googleUser = await (_googleSignIn.signIn());
+        if (googleUser == null) {
+          _error = 'Google sign in failed';
+          _status = Status.Unauthenticated;
+          notifyListeners();
+          return false;
+        }
+        final GoogleSignInAuthentication googleAuth =
+            await googleUser.authentication;
+        final GoogleAuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        ) as GoogleAuthCredential;
+        await _auth.signInWithCredential(credential);
       }
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
-      final GoogleAuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      ) as GoogleAuthCredential;
-      await _auth.signInWithCredential(credential);
       _error = '';
       return true;
     } catch (e) {
@@ -131,8 +137,13 @@ class UserRepository with ChangeNotifier {
 
   Future<void> _saveUserRecord() async {
     if (_user == null) return;
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    int buildNumber = int.parse(packageInfo.buildNumber);
+    int buildNumber;
+    if (kIsWeb) {
+      buildNumber = 1;
+    } else {
+      PackageInfo packageInfo = await PackageInfo.fromPlatform();
+      buildNumber = int.parse(packageInfo.buildNumber);
+    }
     UserModel user = UserModel(
       email: _user!.email,
       name: _user!.displayName,

@@ -87,7 +87,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 onPressed: () async {
                   if (!await user.signInWithGoogle())
                     _key.currentState!.showSnackBar(SnackBar(
-                      content: Text("Something is wrong"),
+                      content: Text(user.error!),
                     ));
                 },
               ),
